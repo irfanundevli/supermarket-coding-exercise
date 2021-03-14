@@ -1,11 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { ShoppingBasket } from "./shopping-basket";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { GroupedItem } from "./shopping-basket.state";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("recoil");
 const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<
   typeof useRecoilValue
+>;
+const mockUseSetRecoilState = useSetRecoilState as jest.MockedFunction<
+  typeof useSetRecoilState
 >;
 
 describe("shopping basket component", () => {
@@ -25,18 +29,11 @@ describe("shopping basket component", () => {
     quantity: 2,
   };
 
-  const setGroupedItemsAndTotalCost = (
-    itemList: GroupedItem[],
-    totalCost: number
-  ) => {
-    mockUseRecoilValue.mockReturnValue({
-      groupedItems: itemList,
-      totalCost,
-    });
-  };
-
   it("should render items in basket", () => {
-    setGroupedItemsAndTotalCost([item1, item2], 3.15);
+    mockUseRecoilValue.mockReturnValueOnce({
+      groupedItems: [item1, item2],
+      totalCost: 3.15,
+    });
 
     render(<ShoppingBasket />);
 
@@ -52,10 +49,32 @@ describe("shopping basket component", () => {
   });
 
   it("should render total cost", () => {
-    setGroupedItemsAndTotalCost([item1, item2], 3.15);
+    mockUseRecoilValue.mockReturnValueOnce({
+      groupedItems: [item1, item2],
+      totalCost: 3.15,
+    });
 
     render(<ShoppingBasket />);
 
     expect(screen.getByText("Sub-total: 3.15")).toBeInTheDocument();
+  });
+
+  it("should remove grouped item from basket when remove button is clicked", () => {
+    mockUseRecoilValue
+      .mockReturnValueOnce({
+        groupedItems: [item1],
+        totalCost: 0.65,
+      })
+      .mockReturnValue({
+        groupedItems: [],
+      });
+    const mocksetBasketItemList = jest.fn();
+    mockUseSetRecoilState.mockReturnValue(mocksetBasketItemList);
+
+    const { rerender } = render(<ShoppingBasket />);
+    userEvent.click(screen.getByText("Remove"));
+    rerender(<ShoppingBasket />);
+
+    expect(screen.queryByText(item1.name)).not.toBeInTheDocument();
   });
 });

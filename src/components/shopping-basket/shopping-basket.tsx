@@ -1,11 +1,24 @@
-import { useRecoilValue } from "recoil";
-import { shoppingBasketCalculationState } from "./shopping-basket.state";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  GroupedItem,
+  shoppingBasketCalculationState,
+  shoppingBasketItemsState,
+} from "./shopping-basket.state";
 import "./shopping-basket.scss";
 
 export const ShoppingBasket: React.FC = () => {
   const { groupedItems, totalCost } = useRecoilValue(
     shoppingBasketCalculationState
   );
+  const setBasketItemList = useSetRecoilState(shoppingBasketItemsState);
+
+  const handleRemoveItem = (item: GroupedItem) => {
+    setBasketItemList((oldBasketItems) => {
+      return oldBasketItems.filter((value) => {
+        return value.id !== item.id;
+      });
+    });
+  };
 
   return (
     <div className="c-shopping-basket">
@@ -22,8 +35,22 @@ export const ShoppingBasket: React.FC = () => {
                 src={item.imageUrl}
                 alt={item.name}
               />
-              <div>{item.name}</div>
-              <div>Qty: {item.quantity}</div>
+              <div>
+                <div>{item.name}</div>
+                <div className="c-shopping-basket__item-desc">
+                  <div>Qty: {item.quantity}</div>
+                  <div className="c-shopping-basket__seperator">{"|"}</div>
+                  <a
+                    href="/"
+                    onClick={(e: React.MouseEvent) => {
+                      e.preventDefault();
+                      handleRemoveItem(item);
+                    }}
+                  >
+                    Remove
+                  </a>
+                </div>
+              </div>
               <div>{item.unitPrice}</div>
             </div>
           );

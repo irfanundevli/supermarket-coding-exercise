@@ -19,4 +19,16 @@
       height: 100%;
     }
   }
+
+  &__item-desc {
+    display: flex;
+
+    > a {
+      text-decoration: none;
+    }
+  }
+
+  &__seperator {
+    margin: 0 10px;
+  }
 }
