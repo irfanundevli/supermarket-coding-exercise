@@ -37,4 +37,12 @@ describe("item list component", () => {
     expect(screen.getByText(item2.price)).toBeInTheDocument();
     expect(screen.getByAltText(item2.name)).toBeInTheDocument();
   });
+
+  it("should render a button to add item to basket", () => {
+    setItems([item1]);
+
+    render(<ItemList />);
+
+    expect(screen.getByText("Add to Basket")).toBeInTheDocument();
+  });
 });

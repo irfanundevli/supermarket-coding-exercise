@@ -19,6 +19,7 @@ export const ItemList: React.FC = () => {
                 />
                 <div>{item.name}</div>
                 <div>{item.price}</div>
+                <button>Add to Basket</button>
               </div>
             );
           })}
