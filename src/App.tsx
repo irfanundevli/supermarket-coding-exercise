@@ -1,5 +1,13 @@
-function App() {
-  return <div className="App">Supermarket</div>;
-}
+import React from "react";
+import { ItemList } from "./item-list";
+import { ShoppingBasket } from "./shoping-basket";
+import "./app.scss";
 
-export default App;
+export const App: React.FC = () => {
+  return (
+    <div className="c-app__container">
+      <ItemList />
+      <ShoppingBasket />
+    </div>
+  );
+};
