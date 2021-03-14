@@ -2,6 +2,8 @@ import { render } from "@testing-library/react";
 import { App } from "./app";
 import { byText } from "testing-library-selector";
 
+jest.mock("recoil");
+
 describe("app", () => {
   const ui = {
     itemList: byText("Item List"),
