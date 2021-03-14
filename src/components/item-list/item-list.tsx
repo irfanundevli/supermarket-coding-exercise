@@ -1,8 +1,17 @@
-import { itemList } from "./item.service";
+import { Item, itemList } from "./item.service";
 import "./item-list.scss";
+import { useSetRecoilState } from "recoil";
+import { shoppingBasketItemsState } from "../shopping-basket/shopping-basket.state";
 
 export const ItemList: React.FC = () => {
   const items = itemList();
+  const setShoppingBasketItems = useSetRecoilState(shoppingBasketItemsState);
+
+  const handleAddToBasket = (newItem: Item) => {
+    setShoppingBasketItems((currVal) =>
+      addNewItemToCurrentItemList(newItem, currVal)
+    );
+  };
 
   return (
     <div>
@@ -19,7 +28,13 @@ export const ItemList: React.FC = () => {
                 />
                 <div>{item.name}</div>
                 <div>{item.price}</div>
-                <button>Add to Basket</button>
+                <button
+                  onClick={() => {
+                    handleAddToBasket(item);
+                  }}
+                >
+                  Add to Basket
+                </button>
               </div>
             );
           })}
@@ -27,4 +42,19 @@ export const ItemList: React.FC = () => {
       )}
     </div>
   );
+};
+
+export const addNewItemToCurrentItemList = (
+  newItem: Item,
+  currItemList: Item[]
+): Item[] => {
+  return [
+    ...currItemList,
+    {
+      id: newItem.id,
+      name: newItem.name,
+      price: newItem.price,
+      imageUrl: newItem.imageUrl,
+    },
+  ];
 };
