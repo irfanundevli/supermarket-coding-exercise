@@ -22,7 +22,7 @@ describe("shopping basket component", () => {
     name: "Toilet Paper",
     unitPrice: 0.65,
     imageUrl: "/placeholder2.png",
-    quantity: 1,
+    quantity: 2,
   };
 
   const setGroupedItemsAndTotalCost = (
@@ -43,10 +43,12 @@ describe("shopping basket component", () => {
     expect(screen.getByText(item1.name)).toBeInTheDocument();
     expect(screen.getByText(item1.unitPrice)).toBeInTheDocument();
     expect(screen.getByAltText(item1.name)).toBeInTheDocument();
+    expect(screen.getByText(`Qty: ${item1.quantity}`)).toBeInTheDocument();
 
     expect(screen.getByText(item2.name)).toBeInTheDocument();
     expect(screen.getByText(item2.unitPrice)).toBeInTheDocument();
     expect(screen.getByAltText(item2.name)).toBeInTheDocument();
+    expect(screen.getByText(`Qty: ${item2.quantity}`)).toBeInTheDocument();
   });
 
   it("should render total cost", () => {

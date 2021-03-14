@@ -23,6 +23,7 @@ export const ShoppingBasket: React.FC = () => {
                 alt={item.name}
               />
               <div>{item.name}</div>
+              <div>Qty: {item.quantity}</div>
               <div>{item.unitPrice}</div>
             </div>
           );
