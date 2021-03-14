@@ -1,6 +1,6 @@
 import React from "react";
-import { ItemList } from "./item-list";
-import { ShoppingBasket } from "./shoping-basket";
+import { ItemList } from "../item-list/item-list";
+import { ShoppingBasket } from "../shopping-basket/shoping-basket";
 import "./app.scss";
 
 export const App: React.FC = () => {
