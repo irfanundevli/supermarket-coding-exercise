@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { ShoppingBasket } from "./shopping-basket";
+import { removeItemFromCurrentList, ShoppingBasket } from "./shopping-basket";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { GroupedItem } from "./shopping-basket.state";
 import userEvent from "@testing-library/user-event";
+import { Item } from "../item-list/item.service";
 
 jest.mock("recoil");
 const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<
@@ -59,7 +60,7 @@ describe("shopping basket component", () => {
     expect(screen.getByText("Sub-total: 3.15")).toBeInTheDocument();
   });
 
-  it("should remove grouped item from basket when remove button is clicked", () => {
+  it("should remove grouped item from item list when remove button is clicked", () => {
     mockUseRecoilValue
       .mockReturnValueOnce({
         groupedItems: [item1],
@@ -71,10 +72,38 @@ describe("shopping basket component", () => {
     const mocksetBasketItemList = jest.fn();
     mockUseSetRecoilState.mockReturnValue(mocksetBasketItemList);
 
-    const { rerender } = render(<ShoppingBasket />);
+    render(<ShoppingBasket />);
     userEvent.click(screen.getByText("Remove"));
-    rerender(<ShoppingBasket />);
 
-    expect(screen.queryByText(item1.name)).not.toBeInTheDocument();
+    expect(mocksetBasketItemList).toHaveBeenNthCalledWith(
+      1,
+      expect.any(Function)
+    );
+  });
+});
+
+describe("removeItemFromCurrentList", () => {
+  const item1: Item = {
+    id: "1",
+    name: "Face Mask",
+    price: 2.5,
+    imageUrl: "/placeholder1.png",
+  };
+
+  const item2: Item = {
+    id: "2",
+    name: "Hand Sanitizer",
+    price: 2.5,
+    imageUrl: "/placeholder2.png",
+  };
+
+  it("should remove item from current list", () => {
+    const currentList = [item1, item2];
+    const { id, name, imageUrl, price: unitPrice } = item1;
+    const groupedItem = { id, name, imageUrl, unitPrice, quantity: 1 };
+
+    const result = removeItemFromCurrentList(groupedItem, currentList);
+
+    expect(result).toEqual([item2]);
   });
 });

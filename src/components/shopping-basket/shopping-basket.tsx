@@ -5,6 +5,7 @@ import {
   shoppingBasketItemsState,
 } from "./shopping-basket.state";
 import "./shopping-basket.scss";
+import { Item } from "../item-list/item.service";
 
 export const ShoppingBasket: React.FC = () => {
   const { groupedItems, totalCost } = useRecoilValue(
@@ -13,11 +14,9 @@ export const ShoppingBasket: React.FC = () => {
   const setBasketItemList = useSetRecoilState(shoppingBasketItemsState);
 
   const handleRemoveItem = (item: GroupedItem) => {
-    setBasketItemList((oldBasketItems) => {
-      return oldBasketItems.filter((value) => {
-        return value.id !== item.id;
-      });
-    });
+    setBasketItemList((oldBasketItems) =>
+      removeItemFromCurrentList(item, oldBasketItems)
+    );
   };
 
   return (
@@ -58,4 +57,13 @@ export const ShoppingBasket: React.FC = () => {
       {groupedItems.length > 0 && <div>Sub-total: {totalCost}</div>}
     </div>
   );
+};
+
+export const removeItemFromCurrentList = (
+  item: GroupedItem,
+  currList: Item[]
+): Item[] => {
+  return currList.filter((value) => {
+    return value.id !== item.id;
+  });
 };
