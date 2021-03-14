@@ -10,14 +10,14 @@ describe("item list component", () => {
     id: "1",
     name: "Face Mask",
     price: 2.5,
-    imageUrl: "/placeholder.png",
+    imageUrl: "/placeholder1.png",
   };
 
   const item2 = {
     id: "2",
     name: "Toilet Paper",
     price: 0.65,
-    imageUrl: "/placeholder.png",
+    imageUrl: "/placeholder2.png",
   };
 
   const setItems = (itemList: Item[]) => {
@@ -31,8 +31,10 @@ describe("item list component", () => {
 
     expect(screen.getByText(item1.name)).toBeInTheDocument();
     expect(screen.getByText(item1.price)).toBeInTheDocument();
+    expect(screen.getByAltText(item1.name)).toBeInTheDocument();
 
     expect(screen.getByText(item2.name)).toBeInTheDocument();
     expect(screen.getByText(item2.price)).toBeInTheDocument();
+    expect(screen.getByAltText(item2.name)).toBeInTheDocument();
   });
 });

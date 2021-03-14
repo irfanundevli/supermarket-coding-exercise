@@ -11,19 +11,19 @@ export const itemList = (): Item[] | undefined => {
       id: "1",
       name: "Face Mask",
       price: 2.5,
-      imageUrl: "/placeholder.png",
+      imageUrl: "/images/face-mask.svg",
     },
     {
       id: "2",
       name: "Toilet Paper",
       price: 0.65,
-      imageUrl: "/placeholder.png",
+      imageUrl: "/images/toilet-paper.svg",
     },
     {
       id: "3",
       name: "Hand Sanitizer",
       price: 19.99,
-      imageUrl: "/placeholder.png",
+      imageUrl: "/images/hand-sanitizer.svg",
     },
   ];
 };
