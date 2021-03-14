@@ -1,8 +1,7 @@
 import { render } from "@testing-library/react";
 import { App } from "./app";
 import { byText } from "testing-library-selector";
-
-jest.mock("recoil");
+import { RecoilRoot } from "recoil";
 
 describe("app", () => {
   const ui = {
@@ -11,14 +10,22 @@ describe("app", () => {
   };
 
   it("should render item list component", () => {
-    render(<App />);
+    render(<WrappedApp />);
 
     expect(ui.itemList.get()).toBeInTheDocument();
   });
 
   it("should render shopping basket component", () => {
-    render(<App />);
+    render(<WrappedApp />);
 
     expect(ui.shoppingBasket.get()).toBeInTheDocument();
   });
 });
+
+const WrappedApp = () => {
+  return (
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  );
+};
