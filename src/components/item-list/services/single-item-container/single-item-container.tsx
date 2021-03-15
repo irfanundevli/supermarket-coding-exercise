@@ -1,11 +1,11 @@
 import { Item } from "../item-provider/item-provider.service";
 
-type SingleItemContainerProps = {
+type Props = {
   item: Item;
   handleAddToBasket: (item: Item) => void;
 };
 
-export const SingleItemContainer: React.FC<SingleItemContainerProps> = ({
+export const SingleItemContainer: React.FC<Props> = ({
   item,
   handleAddToBasket,
 }) => {
