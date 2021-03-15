@@ -7,17 +7,17 @@ import { appState } from "./state/app.state";
 import { Receipt } from "../receipt/receipt";
 
 export const App: React.FC = () => {
-  const shopping = useRecoilValue(appState);
+  const { isShoppingDone } = useRecoilValue(appState);
 
   return (
     <div className="c-app__container">
-      {!shopping.isShoppingDone && (
+      {!isShoppingDone && (
         <>
           <ItemList />
           <ShoppingBasket />
         </>
       )}
-      {shopping.isShoppingDone && <Receipt />}
+      {isShoppingDone && <Receipt />}
     </div>
   );
 };
