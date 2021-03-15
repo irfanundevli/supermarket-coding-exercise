@@ -16,6 +16,10 @@ jest.mock("../shopping-basket/shopping-basket", () => ({
   ShoppingBasket: () => <div>Shopping Basket</div>,
 }));
 
+jest.mock("../receipt/receipt", () => ({
+  Receipt: () => <div>Receipt</div>,
+}));
+
 describe("app", () => {
   const ui = {
     itemList: byText("Item List"),

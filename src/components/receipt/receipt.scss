@@ -1,0 +1,9 @@
+.c-receipt {
+  min-width: 220px;
+  background-color: lightgrey;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
