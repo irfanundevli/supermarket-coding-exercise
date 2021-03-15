@@ -1,6 +1,6 @@
-# PunkApi React App
+# Supermarket React App
 
-Suupermarket React App
+Supermarket React App
 
 # Quick Start
 
