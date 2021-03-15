@@ -53,11 +53,42 @@ describe("shopping basket component", () => {
     mockUseRecoilValue.mockReturnValueOnce({
       groupedItems: [item1, item2],
       totalCost: 3.15,
+      discounts: [],
+      totalDiscount: 0,
+      totalPay: 0,
     });
 
     render(<ShoppingBasket />);
 
     expect(screen.getByText("Sub-total: 3.15")).toBeInTheDocument();
+  });
+
+  it("should render total discount", () => {
+    mockUseRecoilValue.mockReturnValueOnce({
+      groupedItems: [item1, item2],
+      totalCost: 3.15,
+      discounts: [],
+      totalDiscount: 1,
+      totalPay: 0,
+    });
+
+    render(<ShoppingBasket />);
+
+    expect(screen.getByText("Total savings: 1")).toBeInTheDocument();
+  });
+
+  it("should render total pay", () => {
+    mockUseRecoilValue.mockReturnValueOnce({
+      groupedItems: [item1, item2],
+      totalCost: 3.15,
+      discounts: [],
+      totalDiscount: 1,
+      totalPay: 2.15,
+    });
+
+    render(<ShoppingBasket />);
+
+    expect(screen.getByText("Total to Pay: 2.15")).toBeInTheDocument();
   });
 
   it("should remove grouped item from item list when remove button is clicked", () => {

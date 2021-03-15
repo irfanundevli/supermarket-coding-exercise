@@ -8,7 +8,7 @@ import "./shopping-basket.scss";
 import { Item } from "../item-list/item.service";
 
 export const ShoppingBasket: React.FC = () => {
-  const { groupedItems, totalCost } = useRecoilValue(
+  const { groupedItems, totalCost, totalDiscount, totalPay } = useRecoilValue(
     shoppingBasketCalculationState
   );
   const setBasketItemList = useSetRecoilState(shoppingBasketItemsState);
@@ -54,7 +54,13 @@ export const ShoppingBasket: React.FC = () => {
             </div>
           );
         })}
-      {groupedItems.length > 0 && <div>Sub-total: {totalCost}</div>}
+      {groupedItems.length > 0 && (
+        <div>
+          <div>Sub-total: {totalCost}</div>
+          <div>Total savings: {totalDiscount}</div>
+          <div>Total to Pay: {totalPay}</div>
+        </div>
+      )}
     </div>
   );
 };

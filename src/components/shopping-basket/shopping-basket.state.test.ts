@@ -3,10 +3,18 @@ import {
   shoppingBasketCalculationState,
   shoppingBasketItemsState,
 } from "./shopping-basket.state";
+import { applyDiscount } from "./discount.service";
 
+jest.mock("./discount.service", () => ({
+  applyDiscount: jest.fn(),
+}));
+const mockApplyDiscountTo = applyDiscount as jest.MockedFunction<
+  typeof applyDiscount
+>;
 describe("shopping basket state", () => {
   describe("shoppingBasketCalculateState", () => {
     it("should return defaults if there is no item", () => {
+      mockApplyDiscountTo.mockReturnValue([]);
       const initialSnapshot = snapshot_UNSTABLE();
 
       expect(
@@ -15,11 +23,21 @@ describe("shopping basket state", () => {
           .valueOrThrow()
       ).toEqual({
         groupedItems: [],
+        discounts: [],
         totalCost: 0,
+        totalDiscount: 0,
+        totalPay: 0,
       });
     });
 
     it("should return calculation if there are items", () => {
+      mockApplyDiscountTo.mockReturnValue([
+        {
+          itemId: "1",
+          promotionName: "Test",
+          reducedPay: 3,
+        },
+      ]);
       const initialSnapshot = snapshot_UNSTABLE(({ set }) =>
         set(shoppingBasketItemsState, [
           {
@@ -64,7 +82,16 @@ describe("shopping basket state", () => {
             quantity: 1,
           },
         ],
+        discounts: [
+          {
+            itemId: "1",
+            promotionName: "Test",
+            reducedPay: 3,
+          },
+        ],
         totalCost: 8,
+        totalDiscount: 3,
+        totalPay: 5,
       });
     });
   });

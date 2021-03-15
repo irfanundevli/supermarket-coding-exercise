@@ -1,5 +1,6 @@
 import { atom, selector } from "recoil";
 import { Item } from "../item-list/item.service";
+import { applyDiscount as applyDiscountTo, Discount } from "./discount.service";
 
 export type GroupedItem = Omit<Item, "price"> & {
   unitPrice: number;
@@ -9,6 +10,9 @@ export type GroupedItem = Omit<Item, "price"> & {
 type ShoppingBasketCalculation = {
   groupedItems: GroupedItem[];
   totalCost: number;
+  discounts: Discount[];
+  totalPay: number;
+  totalDiscount: number;
 };
 
 export const shoppingBasketItemsState = atom({
@@ -24,10 +28,19 @@ export const shoppingBasketCalculationState = selector<ShoppingBasketCalculation
 
       const groupedItems = group(itemsInBasket);
       const totalCost = calculateTotalCostOf(groupedItems);
+      const discounts = applyDiscountTo(groupedItems);
+      const totalDiscount = discounts.reduce(
+        (ack, discount) => ack + discount.reducedPay,
+        0
+      );
+      const totalPay = totalCost - totalDiscount;
 
       return {
         groupedItems,
         totalCost,
+        discounts,
+        totalPay,
+        totalDiscount,
       };
     },
   }
