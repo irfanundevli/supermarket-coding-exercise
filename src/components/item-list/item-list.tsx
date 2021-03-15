@@ -1,7 +1,9 @@
-import { Item, itemList } from "./services/item/item.service";
+import { Fragment } from "react";
+import { Item, itemList } from "./services/item-provider/item-provider.service";
 import "./item-list.scss";
 import { useSetRecoilState } from "recoil";
 import { shoppingBasketItemsState } from "../shopping-basket/state/shopping-basket.state";
+import { SingleItemContainer } from "./services/single-item-container/single-item-container";
 
 export const ItemList: React.FC = () => {
   const items = itemList();
@@ -20,22 +22,12 @@ export const ItemList: React.FC = () => {
         <div className="c-item-list__item-container">
           {items.map((item, index) => {
             return (
-              <div key={`${item.id}-${index}`} className="c-item-list__item">
-                <img
-                  className="c-item-list__item-image"
-                  src={item.imageUrl}
-                  alt={item.name}
+              <Fragment key={`${item.id}-${index}`}>
+                <SingleItemContainer
+                  item={item}
+                  handleAddToBasket={handleAddToBasket}
                 />
-                <div>{item.name}</div>
-                <div>{item.price}</div>
-                <button
-                  onClick={() => {
-                    handleAddToBasket(item);
-                  }}
-                >
-                  Add to Basket
-                </button>
-              </div>
+              </Fragment>
             );
           })}
         </div>

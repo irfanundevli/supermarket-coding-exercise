@@ -3,7 +3,7 @@ import { removeItemFromCurrentList, ShoppingBasket } from "./shopping-basket";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { GroupedItem } from "./state/shopping-basket.state";
 import userEvent from "@testing-library/user-event";
-import { Item } from "../item-list/services/item/item.service";
+import { Item } from "../item-list/services/item-provider/item-provider.service";
 
 jest.mock("recoil");
 const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<

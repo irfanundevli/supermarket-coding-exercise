@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Receipt } from "./receipt";
 import { useRecoilValue } from "recoil";
-import { Item } from "../item-list/services/item/item.service";
+import { Item } from "../item-list/services/item-provider/item-provider.service";
 import { Discount } from "../shopping-basket/services/discount/discount.service";
 
 jest.mock("recoil");

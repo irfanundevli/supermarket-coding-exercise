@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { Item } from "../../item-list/services/item/item.service";
+import { Item } from "../../item-list/services/item-provider/item-provider.service";
 import {
   applyDiscount as applyDiscountTo,
   Discount,
