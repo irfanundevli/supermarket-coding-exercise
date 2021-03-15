@@ -1,12 +1,13 @@
 import { Fragment } from "react";
-import { Item, itemList } from "./services/item-provider/item-provider.service";
+import { Item } from "./services/item-provider/item-provider.service";
 import "./item-list.scss";
 import { useSetRecoilState } from "recoil";
 import { shoppingBasketItemsState } from "../shopping-basket/state/shopping-basket.state";
 import { SingleItemContainer } from "./services/single-item-container/single-item-container";
+import { useItems } from "./hooks/useItems";
 
 export const ItemList: React.FC = () => {
-  const items = itemList();
+  const items = useItems();
   const setShoppingBasketItems = useSetRecoilState(shoppingBasketItemsState);
 
   const handleAddToBasket = (newItem: Item) => {

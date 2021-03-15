@@ -5,7 +5,7 @@ export type Item = {
   imageUrl: string;
 };
 
-export const itemList = (): Item[] | undefined => {
+export const itemList = (): Item[] => {
   return [
     {
       id: "1",
