@@ -3,9 +3,9 @@ import {
   shoppingBasketCalculationState,
   shoppingBasketItemsState,
 } from "./shopping-basket.state";
-import { applyDiscount } from "../services/discount.service";
+import { applyDiscount } from "../services/discount/discount.service";
 
-jest.mock("../services/discount.service", () => ({
+jest.mock("../services/discount/discount.service", () => ({
   applyDiscount: jest.fn(),
 }));
 const mockApplyDiscountTo = applyDiscount as jest.MockedFunction<

@@ -1,4 +1,4 @@
-import { Item, itemList } from "./services/item.service";
+import { Item, itemList } from "./services/item/item.service";
 import "./item-list.scss";
 import { useSetRecoilState } from "recoil";
 import { shoppingBasketItemsState } from "../shopping-basket/state/shopping-basket.state";

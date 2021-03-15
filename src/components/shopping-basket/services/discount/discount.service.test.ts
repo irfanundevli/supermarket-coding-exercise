@@ -1,8 +1,8 @@
+import { GroupedItem } from "../../state/shopping-basket.state";
+import { multiBuyPromotionOf } from "../promotion/promotion.service";
 import { applyDiscount } from "./discount.service";
-import { multiBuyPromotionOf } from "./promotion.service";
-import { GroupedItem } from "../state/shopping-basket.state";
 
-jest.mock("./promotion.service");
+jest.mock("../promotion/promotion.service");
 const mockMultiBuyPromotion = multiBuyPromotionOf as jest.MockedFunction<
   typeof multiBuyPromotionOf
 >;

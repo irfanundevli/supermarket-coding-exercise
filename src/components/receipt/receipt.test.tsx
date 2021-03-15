@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { Receipt } from "./receipt";
 import { useRecoilValue } from "recoil";
-import { Item } from "../item-list/services/item.service";
-import { Discount } from "../shopping-basket/services/discount.service";
+import { Item } from "../item-list/services/item/item.service";
+import { Discount } from "../shopping-basket/services/discount/discount.service";
 
 jest.mock("recoil");
 const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<

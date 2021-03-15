@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { byText } from "testing-library-selector";
 import { ItemList, addNewItemToCurrentItemList } from "./item-list";
-import { Item, itemList } from "./services/item.service";
+import { Item, itemList } from "./services/item/item.service";
 import { useSetRecoilState } from "recoil";
 
-jest.mock("./services/item.service");
+jest.mock("./services/item/item.service");
 const mockItemList = itemList as jest.MockedFunction<typeof itemList>;
 
 jest.mock("recoil");

@@ -5,7 +5,7 @@ import {
   shoppingBasketItemsState,
 } from "./state/shopping-basket.state";
 import "./shopping-basket.scss";
-import { Item } from "../item-list/services/item.service";
+import { Item } from "../item-list/services/item/item.service";
 import { appState } from "../app/state/app.state";
 
 export const ShoppingBasket: React.FC = () => {

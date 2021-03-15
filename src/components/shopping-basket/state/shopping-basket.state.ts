@@ -1,9 +1,9 @@
 import { atom, selector } from "recoil";
-import { Item } from "../../item-list/services/item.service";
+import { Item } from "../../item-list/services/item/item.service";
 import {
   applyDiscount as applyDiscountTo,
   Discount,
-} from "../services/discount.service";
+} from "../services/discount/discount.service";
 
 export type GroupedItem = Omit<Item, "price"> & {
   unitPrice: number;

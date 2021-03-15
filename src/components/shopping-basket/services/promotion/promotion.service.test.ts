@@ -1,4 +1,4 @@
-import { GroupedItem } from "../state/shopping-basket.state";
+import { GroupedItem } from "../../state/shopping-basket.state";
 import { multiBuyPromotionOf } from "./promotion.service";
 
 describe("promotion service", () => {
