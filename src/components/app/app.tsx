@@ -11,13 +11,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="c-app__container">
-      {!isShoppingDone && (
+      {isShoppingDone ? (
+        <Receipt />
+      ) : (
         <>
           <ItemList />
           <ShoppingBasket />
         </>
       )}
-      {isShoppingDone && <Receipt />}
     </div>
   );
 };
