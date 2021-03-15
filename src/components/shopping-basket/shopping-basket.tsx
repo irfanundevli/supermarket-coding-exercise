@@ -6,12 +6,14 @@ import {
 } from "./state/shopping-basket.state";
 import "./shopping-basket.scss";
 import { Item } from "../item-list/services/item.service";
+import { appState } from "../app/state/app.state";
 
 export const ShoppingBasket: React.FC = () => {
   const { groupedItems, totalCost, totalDiscount, totalPay } = useRecoilValue(
     shoppingBasketCalculationState
   );
   const setBasketItemList = useSetRecoilState(shoppingBasketItemsState);
+  const setShoppingStatus = useSetRecoilState(appState);
 
   const handleRemoveItem = (item: GroupedItem) => {
     setBasketItemList((oldBasketItems) =>
@@ -55,10 +57,17 @@ export const ShoppingBasket: React.FC = () => {
           );
         })}
       {groupedItems.length > 0 && (
-        <div>
+        <div className="c-shopping-basket__summary">
           <div>Sub-total: {totalCost}</div>
           <div>Total savings: {totalDiscount}</div>
           <div>Total to Pay: {totalPay}</div>
+          <button
+            onClick={() => {
+              setShoppingStatus({ isShoppingDone: true });
+            }}
+          >
+            Buy Now
+          </button>
         </div>
       )}
     </div>

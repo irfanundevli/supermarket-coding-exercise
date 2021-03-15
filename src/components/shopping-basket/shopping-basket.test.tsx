@@ -111,6 +111,30 @@ describe("shopping basket component", () => {
       expect.any(Function)
     );
   });
+
+  it("should update app state as shopping done when but now button is clicked", () => {
+    mockUseRecoilValue
+      .mockReturnValueOnce({
+        groupedItems: [item1],
+        totalCost: 0.65,
+      })
+      .mockReturnValue({
+        groupedItems: [],
+      });
+    const mocksetBasketItemList = jest.fn();
+    const mockSetShoppingStatus = jest.fn();
+
+    mockUseSetRecoilState
+      .mockReturnValueOnce(mocksetBasketItemList)
+      .mockReturnValueOnce(mockSetShoppingStatus);
+
+    render(<ShoppingBasket />);
+    userEvent.click(screen.getByText("Buy Now"));
+
+    expect(mockSetShoppingStatus).toHaveBeenNthCalledWith(1, {
+      isShoppingDone: true,
+    });
+  });
 });
 
 describe("removeItemFromCurrentList", () => {

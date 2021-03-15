@@ -31,4 +31,9 @@
   &__seperator {
     margin: 0 10px;
   }
+
+  &__summary {
+    display: flex;
+    flex-direction: column;
+  }
 }
