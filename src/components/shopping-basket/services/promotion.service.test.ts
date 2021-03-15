@@ -1,5 +1,5 @@
+import { GroupedItem } from "../state/shopping-basket.state";
 import { multiBuyPromotionOf } from "./promotion.service";
-import { GroupedItem } from "./shopping-basket.state";
 
 describe("promotion service", () => {
   it("should return promotion by seacrhing item id", () => {
