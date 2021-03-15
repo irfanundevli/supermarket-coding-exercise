@@ -1,31 +1,61 @@
 import { render } from "@testing-library/react";
 import { App } from "./app";
 import { byText } from "testing-library-selector";
-import { RecoilRoot } from "recoil";
+import { useRecoilValue } from "recoil";
+
+jest.mock("recoil");
+const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<
+  typeof useRecoilValue
+>;
+
+jest.mock("../item-list/item-list", () => ({
+  ItemList: () => <div>Item List</div>,
+}));
+
+jest.mock("../shopping-basket/shopping-basket", () => ({
+  ShoppingBasket: () => <div>Shopping Basket</div>,
+}));
 
 describe("app", () => {
   const ui = {
     itemList: byText("Item List"),
     shoppingBasket: byText("Shopping Basket"),
+    receipt: byText("Receipt"),
+  };
+
+  const setShoppingStatusAsContinue = () => {
+    mockUseRecoilValue.mockReturnValue({
+      isShoppingDone: false,
+    });
+  };
+
+  const setShoppingStatusAsDone = () => {
+    mockUseRecoilValue.mockReturnValueOnce({
+      isShoppingDone: true,
+    });
   };
 
   it("should render item list component", () => {
-    render(<WrappedApp />);
+    setShoppingStatusAsContinue();
+
+    render(<App />);
 
     expect(ui.itemList.get()).toBeInTheDocument();
   });
 
   it("should render shopping basket component", () => {
-    render(<WrappedApp />);
+    setShoppingStatusAsContinue();
+
+    render(<App />);
 
     expect(ui.shoppingBasket.get()).toBeInTheDocument();
   });
-});
 
-const WrappedApp = () => {
-  return (
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
-  );
-};
+  it("should render receipt when shopping is done", () => {
+    setShoppingStatusAsDone();
+
+    render(<App />);
+
+    expect(ui.receipt.get()).toBeInTheDocument();
+  });
+});
