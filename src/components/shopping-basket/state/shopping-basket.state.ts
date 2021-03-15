@@ -53,26 +53,12 @@ function group(itemsInBasket: Item[]): GroupedItem[] {
   const groupedItems = [] as GroupedItem[];
 
   itemsInBasket.forEach((item) => {
-    const groupItemIndex = groupedItems.findIndex(
-      (existingItemInTheSummary) => existingItemInTheSummary.id === item.id
-    );
+    const groupItemIndex = findItemIndex(groupedItems, item);
 
     if (groupItemIndex >= 0) {
-      const existingGroupItem = groupedItems[groupItemIndex];
-      groupedItems[groupItemIndex] = {
-        ...existingGroupItem,
-        quantity: existingGroupItem.quantity + 1,
-      };
+      incrementItemQuantityByOneAtIndex(groupedItems, groupItemIndex);
     } else {
-      const { id, name, imageUrl } = item;
-
-      groupedItems.push({
-        id,
-        name,
-        imageUrl,
-        unitPrice: item.price,
-        quantity: 1,
-      });
+      addNewGroupedItem(groupedItems, item);
     }
   });
 
@@ -85,4 +71,30 @@ function calculateTotalCostOf(groupedItems: GroupedItem[]): number {
     0
   );
   return totalCost;
+}
+
+function findItemIndex(arr: GroupedItem[], item: Item): number {
+  return arr.findIndex(
+    (existingItemInTheSummary) => existingItemInTheSummary.id === item.id
+  );
+}
+
+function incrementItemQuantityByOneAtIndex(arr: GroupedItem[], index: number) {
+  const exisitingItem = arr[index];
+  arr[index] = {
+    ...exisitingItem,
+    quantity: exisitingItem.quantity + 1,
+  };
+}
+
+function addNewGroupedItem(arr: GroupedItem[], item: Item) {
+  const { id, name, imageUrl } = item;
+
+  arr.push({
+    id,
+    name,
+    imageUrl,
+    unitPrice: item.price,
+    quantity: 1,
+  });
 }
