@@ -12,10 +12,10 @@ export type GroupedItem = Omit<Item, "price"> & {
 
 type ShoppingBasketCalculation = {
   groupedItems: GroupedItem[];
-  totalCost: number;
+  totalCost: string;
   discounts: Discount[];
-  totalPay: number;
-  totalDiscount: number;
+  totalPay: string;
+  totalDiscount: string;
 };
 
 export const shoppingBasketItemsState = atom({
@@ -40,10 +40,10 @@ export const shoppingBasketCalculationState = selector<ShoppingBasketCalculation
 
       return {
         groupedItems,
-        totalCost,
+        totalCost: totalCost.toFixed(2),
         discounts,
-        totalPay,
-        totalDiscount,
+        totalPay: totalPay.toFixed(2),
+        totalDiscount: totalDiscount.toFixed(2),
       };
     },
   }

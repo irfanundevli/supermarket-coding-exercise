@@ -24,9 +24,9 @@ describe("shopping basket state", () => {
       ).toEqual({
         groupedItems: [],
         discounts: [],
-        totalCost: 0,
-        totalDiscount: 0,
-        totalPay: 0,
+        totalCost: "0.00",
+        totalDiscount: "0.00",
+        totalPay: "0.00",
       });
     });
 
@@ -89,9 +89,9 @@ describe("shopping basket state", () => {
             reducedPay: 3,
           },
         ],
-        totalCost: 8,
-        totalDiscount: 3,
-        totalPay: 5,
+        totalCost: "8.00",
+        totalDiscount: "3.00",
+        totalPay: "5.00",
       });
     });
   });

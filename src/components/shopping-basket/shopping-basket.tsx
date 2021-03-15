@@ -52,7 +52,7 @@ export const ShoppingBasket: React.FC = () => {
                   </a>
                 </div>
               </div>
-              <div>{item.unitPrice}</div>
+              <div>{(item.unitPrice * item.quantity).toFixed(2)}</div>
             </div>
           );
         })}

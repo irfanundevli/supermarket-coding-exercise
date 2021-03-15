@@ -30,7 +30,7 @@ describe("shopping basket component", () => {
     quantity: 2,
   };
 
-  it("should render items in basket", () => {
+  it("should render items in basket as grouped by item id", () => {
     mockUseRecoilValue.mockReturnValueOnce({
       groupedItems: [item1, item2],
       totalCost: 3.15,
@@ -39,12 +39,16 @@ describe("shopping basket component", () => {
     render(<ShoppingBasket />);
 
     expect(screen.getByText(item1.name)).toBeInTheDocument();
-    expect(screen.getByText(item1.unitPrice)).toBeInTheDocument();
+    expect(
+      screen.getByText((item1.unitPrice * item1.quantity).toFixed(2))
+    ).toBeInTheDocument();
     expect(screen.getByAltText(item1.name)).toBeInTheDocument();
     expect(screen.getByText(`Qty: ${item1.quantity}`)).toBeInTheDocument();
 
     expect(screen.getByText(item2.name)).toBeInTheDocument();
-    expect(screen.getByText(item2.unitPrice)).toBeInTheDocument();
+    expect(
+      screen.getByText((item2.unitPrice * item2.quantity).toFixed(2))
+    ).toBeInTheDocument();
     expect(screen.getByAltText(item2.name)).toBeInTheDocument();
     expect(screen.getByText(`Qty: ${item2.quantity}`)).toBeInTheDocument();
   });

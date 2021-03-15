@@ -26,9 +26,9 @@ describe("receipt component", () => {
   it("should render items", () => {
     mockUseRecoilValue.mockReturnValueOnce([item]).mockReturnValueOnce({
       discounts: [],
-      totalPay: 0,
-      totalCost: 0,
-      totalDiscount: 0,
+      totalPay: "0",
+      totalCost: "0",
+      totalDiscount: "0",
     });
 
     render(<Receipt />);
@@ -38,12 +38,12 @@ describe("receipt component", () => {
   });
 
   it("should render sub-total", () => {
-    const subTotal = 111;
+    const subTotal = "111";
     mockUseRecoilValue.mockReturnValueOnce([item]).mockReturnValueOnce({
       discounts: [discount],
-      totalPay: 0,
+      totalPay: "0",
       totalCost: subTotal,
-      totalDiscount: 0,
+      totalDiscount: "0",
     });
 
     render(<Receipt />);
@@ -54,9 +54,9 @@ describe("receipt component", () => {
   it("should render discounts", () => {
     mockUseRecoilValue.mockReturnValueOnce([item]).mockReturnValueOnce({
       discounts: [discount],
-      totalPay: 0,
-      totalCost: 0,
-      totalDiscount: 0,
+      totalPay: "0",
+      totalCost: "0",
+      totalDiscount: "0",
     });
 
     render(<Receipt />);
@@ -68,11 +68,11 @@ describe("receipt component", () => {
   });
 
   it("should render total savings", () => {
-    const totalSavings = 34;
+    const totalSavings = "34";
     mockUseRecoilValue.mockReturnValueOnce([item]).mockReturnValueOnce({
       discounts: [discount],
-      totalPay: 0,
-      totalCost: 0,
+      totalPay: "0",
+      totalCost: "0",
       totalDiscount: totalSavings,
     });
 
@@ -82,12 +82,12 @@ describe("receipt component", () => {
   });
 
   it("should render total pay", () => {
-    const totalPay = 9990;
+    const totalPay = "9990";
     mockUseRecoilValue.mockReturnValueOnce([item]).mockReturnValueOnce({
       discounts: [],
       totalPay: totalPay,
-      totalCost: 0,
-      totalDiscount: 0,
+      totalCost: "0",
+      totalDiscount: "0",
     });
 
     render(<Receipt />);
