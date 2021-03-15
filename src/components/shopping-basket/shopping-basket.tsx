@@ -3,9 +3,9 @@ import {
   GroupedItem,
   shoppingBasketCalculationState,
   shoppingBasketItemsState,
-} from "./shopping-basket.state";
+} from "./state/shopping-basket.state";
 import "./shopping-basket.scss";
-import { Item } from "../item-list/item.service";
+import { Item } from "../item-list/services/item.service";
 
 export const ShoppingBasket: React.FC = () => {
   const { groupedItems, totalCost, totalDiscount, totalPay } = useRecoilValue(

@@ -1,7 +1,7 @@
-import { Item, itemList } from "./item.service";
+import { Item, itemList } from "./services/item.service";
 import "./item-list.scss";
 import { useSetRecoilState } from "recoil";
-import { shoppingBasketItemsState } from "../shopping-basket/shopping-basket.state";
+import { shoppingBasketItemsState } from "../shopping-basket/state/shopping-basket.state";
 
 export const ItemList: React.FC = () => {
   const items = itemList();

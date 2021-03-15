@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { removeItemFromCurrentList, ShoppingBasket } from "./shopping-basket";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { GroupedItem } from "./shopping-basket.state";
+import { GroupedItem } from "./state/shopping-basket.state";
 import userEvent from "@testing-library/user-event";
-import { Item } from "../item-list/item.service";
+import { Item } from "../item-list/services/item.service";
 
 jest.mock("recoil");
 const mockUseRecoilValue = useRecoilValue as jest.MockedFunction<
